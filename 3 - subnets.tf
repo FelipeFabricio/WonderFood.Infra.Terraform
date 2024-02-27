@@ -1,49 +1,20 @@
-resource "aws_subnet" "private_us_east_1a" {
-  vpc_id            = aws_vpc.wdf_vpc.id
-  cidr_block        = "10.0.0.0/19"
-  availability_zone = "us-east-1a"
+resource "azurerm_subnet" "wonderfood-mysql-subnet" {
+  name                 = "wonderfood-mysql-subnet"
+  resource_group_name  = azurerm_resource_group.wonderfood-rg.name
+  virtual_network_name = azurerm_virtual_network.wonderfood-vnet.name
+  address_prefixes     = ["10.25.1.0/24"]
 
-  tags = {
-    "Name"                                      = "private_us_east_1a"
-    "kubernetes.io/role/internal-elb"           = "1"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+  delegation {
+    name = "Microsoft.DBforMySQL/flexibleServers"
+    service_delegation {
+      name = "Microsoft.DBforMySQL/flexibleServers"
+    }
   }
 }
 
-resource "aws_subnet" "private_us_east_1b" {
-  vpc_id            = aws_vpc.wdf_vpc.id
-  cidr_block        = "10.0.32.0/19"
-  availability_zone = "us-east-1b"
-
-  tags = {
-    "Name"                                      = "private_us_east_1b"
-    "kubernetes.io/role/internal-elb"           = "1"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-  }
-}
-
-resource "aws_subnet" "public_us_east_1a" {
-  vpc_id                  = aws_vpc.wdf_vpc.id
-  cidr_block              = "10.0.64.0/19"
-  availability_zone       = "us-east-1a"
-  map_public_ip_on_launch = true
-
-  tags = {
-    "Name"                                      = "public_us_east_1a"
-    "kubernetes.io/role/elb"                    = "1"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-  }
-}
-
-resource "aws_subnet" "public_us_east_1b" {
-  vpc_id                  = aws_vpc.wdf_vpc.id
-  cidr_block              = "10.0.96.0/19"
-  availability_zone       = "us-east-1b"
-  map_public_ip_on_launch = true
-
-  tags = {
-    "Name"                                      = "public_us_east_1b"
-    "kubernetes.io/role/elb"                    = "1"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
-  }
+resource "azurerm_subnet" "wonderfood-aks-subnet" {
+  name                 = "wonderfood-aks-subnet"
+  resource_group_name  = azurerm_resource_group.wonderfood-rg.name
+  virtual_network_name = azurerm_virtual_network.wonderfood-vnet.name
+  address_prefixes     = ["10.25.2.0/24"]
 }
