@@ -26,8 +26,8 @@ resource "azurerm_kubernetes_cluster" "wonderdoof-cluster" {
   }
 }
 
-output "kube_config" {
-  value = azurerm_kubernetes_cluster.wonderdoof-cluster.kube_config_raw
-
-  sensitive = true
+resource "azurerm_role_assignment" "github-actions-aks-role" {
+  principal_id         = "4318c106-e000-489f-96b1-76af44cfff9c"
+  role_definition_name = "Azure Kubernetes Service Cluster User Role"
+  scope                = azurerm_kubernetes_cluster.wonderdoof-cluster.id
 }
