@@ -14,16 +14,15 @@ jobs:
       TF_VAR_mysql_password: ${{ secrets.TF_VAR_mysql_password }}
       TF_VAR_mysql_server_name: ${{ secrets.TF_VAR_mysql_server_name }}
       TF_VAR_private_dns_zone_name: ${{ secrets.TF_VAR_private_dns_zone_name }}
-    
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.1.1
 
-      - name: Efetua Login no Azure
-        uses: Azure/login@v1.6.1
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.3
         with:
