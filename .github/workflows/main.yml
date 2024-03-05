@@ -3,7 +3,7 @@ name: Terraform Infra AKS
 on:
   push:
     branches:
-      - master
+      - main
       
 jobs:
   Deploy:
