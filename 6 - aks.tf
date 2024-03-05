@@ -30,4 +30,5 @@ resource "azurerm_role_assignment" "github-actions-aks-role" {
   principal_id         = "4318c106-e000-489f-96b1-76af44cfff9c"
   role_definition_name = "Azure Kubernetes Service Cluster User Role"
   scope                = azurerm_kubernetes_cluster.wonderdoof-cluster.id
+  depends_on           = [azurerm_kubernetes_cluster.wonderdoof-cluster]
 }
