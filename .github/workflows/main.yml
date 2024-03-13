@@ -14,10 +14,12 @@ jobs:
       TF_VAR_mysql_password: ${{ secrets.TF_VAR_MYSQL_PASSWORD }}
       TF_VAR_mysql_server_name: ${{ secrets.TF_VAR_MYSQL_SERVER_NAME }}
       TF_VAR_private_dns_zone_name: ${{ secrets.TF_VAR_PRIVATE_DNS_ZONE_NAME }}
+      TF_VAR_azure_blob_storage_key: ${{ secrets.TF_BLOB_KEY }}
       ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
 
     steps:
       - name: Checkout code
