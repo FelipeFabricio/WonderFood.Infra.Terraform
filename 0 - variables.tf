@@ -1,6 +1,6 @@
 variable "location" {
   description = "Região onde os recursos serão criados"
-  default = "Brazil South"
+  default     = "Brazil South"
 }
 
 variable "mysql_password" {
@@ -17,4 +17,8 @@ variable "mysql_server_name" {
 
 variable "private_dns_zone_name" {
   description = "Nome da Private DNS Zone"
+}
+
+variable "azure_blob_storage_key" {
+  description = "Chave para acesso ao Storage Account do Azure"
 }
