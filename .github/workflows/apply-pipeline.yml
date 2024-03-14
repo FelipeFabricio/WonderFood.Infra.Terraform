@@ -59,8 +59,8 @@ jobs:
       - name: Publish Terraform Plan
         uses: actions/upload-artifact@v4.3.1
         with:
-          name: tfplan
-          path: tfplan
+          name: terraform-plam-${{ github.sha }}
+          path: ${{ github.sha }}.tfplan
       
       - name: Create String Output
         id: tf-plan-string
@@ -120,9 +120,10 @@ jobs:
         run: terraform init
 
       - name: Download Terraform Plan
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.4
         with:
-          name: tfplan
+          name: terraform-plam-${{ github.sha }}
+          path: ${{ github.sha }}.tfplan
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
