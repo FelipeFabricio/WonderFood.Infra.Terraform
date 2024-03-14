@@ -1,4 +1,4 @@
-name: Terraform Plan Pipeline
+name: Terraform Apply Pipeline
 
 on:
   push:
