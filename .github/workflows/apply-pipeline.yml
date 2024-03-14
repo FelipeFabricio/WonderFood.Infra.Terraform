@@ -1,0 +1,47 @@
+name: Terraform Plan Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      TF_VAR_mysql_user: ${{ secrets.TF_VAR_MYSQL_USER }}
+      TF_VAR_mysql_password: ${{ secrets.TF_VAR_MYSQL_PASSWORD }}
+      TF_VAR_mysql_server_name: ${{ secrets.TF_VAR_MYSQL_SERVER_NAME }}
+      TF_VAR_private_dns_zone_name: ${{ secrets.TF_VAR_PRIVATE_DNS_ZONE_NAME }}
+      TF_VAR_azure_blob_storage_key: ${{ secrets.TF_BLOB_KEY }}
+      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+        with:
+          terraform_version: 1.7.2
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+      
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+      
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve
