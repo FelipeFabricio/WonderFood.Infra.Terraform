@@ -111,7 +111,7 @@ jobs:
 
   terraform-apply:
     name: 'Terraform Apply'
-    if: needs.terraform-plan.outputs.tfplanExitCode == 2 && github.event_name == 'push'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     needs: [terraform-plan]
     
