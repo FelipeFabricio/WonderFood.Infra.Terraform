@@ -12,11 +12,6 @@ jobs:
       TF_VAR_mysql_password: ${{ secrets.TF_VAR_MYSQL_PASSWORD }}
       TF_VAR_mysql_server_name: ${{ secrets.TF_VAR_MYSQL_SERVER_NAME }}
       TF_VAR_private_dns_zone_name: ${{ secrets.TF_VAR_PRIVATE_DNS_ZONE_NAME }}
-      TF_VAR_azure_blob_storage_key: ${{ secrets.TF_BLOB_KEY }}
-      ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
 
     steps:
       - name: Checkout code
@@ -27,19 +22,23 @@ jobs:
         with:
           terraform_version: 1.7.2
 
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
-      
       - name: Terraform Init
         id: init
-        run: terraform init
-      
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-      
+        env:
+          ARM_CLIENT_ID: ${{ secrets.TF_ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.TF_ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.TF_ARM_SUBSCRIPTION_ID }}
+          ARM_TENANT_ID: ${{ secrets.TF_ARM_TENANT_ID }}
+          RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+          STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+          CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP"
+                    
       - name: Terraform Destroy
         id: destroy
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         run: terraform destroy -auto-approve
