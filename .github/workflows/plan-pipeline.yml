@@ -6,7 +6,7 @@ on:
       - main
       
 jobs:
-  Deploy:
+  Plan:
     runs-on: ubuntu-latest
 
     env:
