@@ -6,8 +6,11 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    key = "terraform.tfstate"
+backend "azurerm" {
+    resource_group_name  = "wdf-service-principal"
+    storage_account_name = "wonderfoodstorage"
+    container_name       = "tf-deploy"
+    key                  = "terraform.tfstate"
   }
 }
 
