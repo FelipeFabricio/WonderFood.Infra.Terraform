@@ -55,13 +55,6 @@ jobs:
       - name: Terraform Plan
         id: tf-plan
         run: terraform plan -no-color -out tfplan
-
-      - name: Publish Terraform Plan
-        uses: actions/upload-artifact@v4.3.1
-        with:
-          name: tf-plan
-          path: tfplan.out
-  
       
       - name: Create String Output
         id: tf-plan-string
@@ -120,14 +113,8 @@ jobs:
       - name: Terraform Init
         run: terraform init
 
-      - name: Download Terraform Plan
-        uses: actions/download-artifact@v4.1.4
-        with:
-          name: tf-plan
-          path: tfplan.out
-
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan.out
+        run: terraform apply -auto-approve
 
 
                     
