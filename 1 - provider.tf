@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "wdf-service-principal"
+    resource_group_name  = "wonderfood-storage-rg"
     storage_account_name = "wonderfoodstorage"
     container_name       = "tf-deploy"
     key                  = "terraform.tfstate"

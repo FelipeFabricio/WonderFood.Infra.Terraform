@@ -7,7 +7,7 @@ resource "azurerm_mysql_flexible_server" "wonderfood-mysql-server" {
   backup_retention_days  = 7
   delegated_subnet_id    = azurerm_subnet.wonderfood-mysql-subnet.id
   private_dns_zone_id    = azurerm_private_dns_zone.wonderfood-privatedns.id
-  sku_name               = "GP_Standard_D2ds_v4"
+  sku_name               = "B_Standard_B1s"
   version                = "8.0.21"
 
   lifecycle {
