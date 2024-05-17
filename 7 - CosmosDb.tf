@@ -9,14 +9,16 @@ resource "azurerm_cosmosdb_account" "wonderfood-cosmos-account" {
   enable_multiple_write_locations   = false
   enable_automatic_failover         = false
   public_network_access_enabled = true
-  
+ 
   consistency_policy {
     consistency_level = "Session"
   }
 
+
   capabilities {
     name = "EnableMongo"
   }
+
 
   geo_location {
     location          = azurerm_resource_group.wonderfood-rg.location
@@ -24,7 +26,8 @@ resource "azurerm_cosmosdb_account" "wonderfood-cosmos-account" {
   }
 }
 
-resource "azurerm_cosmosdb_sql_database" "wonderfood-mongo-db" {
+
+resource "azurerm_cosmosdb_mongo_database" "wonderfood-mongo-db" {
   name                = "Wonderfood"
   resource_group_name = azurerm_resource_group.wonderfood-rg.name
   account_name        = azurerm_cosmosdb_account.wonderfood-cosmos-account.name

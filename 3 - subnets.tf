@@ -18,3 +18,10 @@ resource "azurerm_subnet" "wonderfood-aks-subnet" {
   virtual_network_name = azurerm_virtual_network.wonderfood-vnet.name
   address_prefixes     = ["10.25.2.0/24"]
 }
+
+resource "azurerm_subnet" "wonderfood-mongo-subnet" {
+  name                 = "wonderfood-mongo-subnet"
+  resource_group_name  = azurerm_resource_group.wonderfood-rg.name
+  virtual_network_name = azurerm_virtual_network.wonderfood-vnet.name
+  address_prefixes     = ["10.25.3.0/24"]
+}
