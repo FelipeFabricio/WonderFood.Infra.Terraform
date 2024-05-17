@@ -4,7 +4,5 @@ resource "azurerm_api_management" "wonderfood-apim" {
   resource_group_name = azurerm_resource_group.wonderfood-rg.name
   publisher_name      = "Wonderfood"
   publisher_email     = "felipefmo@outlook.com"
-
-
   sku_name = "Developer_1"
 }
