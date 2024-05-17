@@ -1,13 +1,11 @@
-
-# WonderFood - Terraform K8S
+# WonderFood - Terraform
 
 ## Sobre
-Repositório referente aos arquivos Terraform para implementação da Infrastrutura Kubernetes no Azure
+Repositório referente aos arquivos Terraform para implementação da Infrastrutura Kubernetes no Azure.
 <br>
 
-## :scroll: Links e Documentação
-- #### Repositório GitHub da Aplicação: https://github.com/FelipeFabricio/WonderFood
-- ####  Desenho Arquitetura Infraestrutura no Azure: https://encurtador.com.br/nuNOT
+## :scroll: Arquitetura Infraestrutura no Azure
+- ####  Arquitetura Infraestrutura no Azure: https://encurtador.com.br/bZT5k
 <br>
 
 ## :hammer_and_wrench:  Tecnologias utilizadas
